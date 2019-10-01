@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 app.use(bodyParser.json())
 
@@ -18,7 +19,22 @@ const requestLogger = (req, res, next) => {
 app.use(requestLogger)
 app.use(express.static('build'))
 
-let observations = [
+
+const url =
+  `mongodb+srv://birdie:birdiepass@birdie-1meb0.mongodb.net/birdie?retryWrites=true&w=majority`
+
+mongoose.connect(url, { useNewUrlParser: true })
+
+const observationSchema = new mongoose.Schema({
+  name: String,
+  scientificName: String,
+  rarity: String,
+  datetime: Date,
+})
+
+const Observation = mongoose.model('Observation', observationSchema)
+
+/* let observations = [
 
     {
         id: 1,
@@ -51,18 +67,20 @@ let observations = [
         other: ""
     }
 
-]
+] */
 
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/observations', (req, res) => {
-    res.json(observations)
+app.get('/api/observations', (req, res) => {
+    Observation.find({}).then(observations => {
+        res.json(observations)
+    })
 })
 
-app.get('/observations/:id', (req, res) => {
+app.get('/api/observations/:id', (req, res) => {
     const id = Number(req.params.id)
     const observation = observations.find(observation => observation.id === id)
 
@@ -74,13 +92,13 @@ app.get('/observations/:id', (req, res) => {
 
 })
 
-app.delete('/observations/:id', (req, res) => {
+app.delete('/api/observations/:id', (req, res) => {
     const id = Number(req.params.id)
     observations = observations.filter(observation => observation.id !== id)
     res.status(204).end()
 })
 
-app.post('/observations', (req, res) => {
+app.post('/api/observations', (req, res) => {
     const body = req.body
 
     if (!body.name) {

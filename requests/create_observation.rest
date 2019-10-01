@@ -1,0 +1,8 @@
+post http://localhost:3004/observations/
+Content-Type: application/json
+
+{
+    "name": "birdie birdie",
+    "scientificName": "birdus birdus",
+    "rarity": "common"
+}

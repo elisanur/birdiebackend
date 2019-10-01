@@ -1,3 +1,4 @@
+require('dotenv').config({path: './process.env'})
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -20,8 +21,7 @@ app.use(requestLogger)
 app.use(express.static('build'))
 
 
-const url =
-  `mongodb+srv://birdie:birdiepass@birdie-1meb0.mongodb.net/birdie?retryWrites=true&w=majority`
+const url = process.env.MONGOURL
 
 mongoose.connect(url, { useNewUrlParser: true })
 
@@ -31,6 +31,14 @@ const observationSchema = new mongoose.Schema({
   rarity: String,
   datetime: Date,
 })
+
+observationSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+      returnedObject.id = returnedObject._id.toString()
+      delete returnedObject._id
+      delete returnedObject.__v
+    }
+  })
 
 const Observation = mongoose.model('Observation', observationSchema)
 
@@ -70,13 +78,11 @@ const Observation = mongoose.model('Observation', observationSchema)
 ] */
 
 
-app.get('/api', (req, res) => {
-    res.send('<h1>Hello World!</h1>')
-})
+
 
 app.get('/api/observations', (req, res) => {
     Observation.find({}).then(observations => {
-        res.json(observations)
+        res.json(observations.map(o => o.toJSON()))
     })
 })
 
@@ -130,6 +136,10 @@ app.post('/api/observations', (req, res) => {
     observations = observations.concat(observation)
 
     res.json(observation)
+})
+
+app.get('/api', (req, res) => {
+    res.send('<h1>Hello World!</h1>')
 })
 
 const generateId = () => {

@@ -1,4 +1,4 @@
-post http://localhost:3004/observations/
+post http://localhost:3004/api/observations/
 Content-Type: application/json
 
 {

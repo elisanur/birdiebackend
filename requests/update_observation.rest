@@ -1,0 +1,22 @@
+// Error!!! see below
+put http://localhost:3004/api/observations/5d94a8e4903a8b4326e5d944
+Content-Type: application/json
+
+{
+    "name": "birdie birdie",
+    "scientificName": "birdus birdus",
+    "rarity": "common"
+}
+
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 28
+ETag: W/"1c-8PNhi5C+sxyTVpD91tXXmdPWMYM"
+Date: Wed, 02 Oct 2019 15:01:17 GMT
+Connection: close
+
+{
+  "error": "unknown endpoint"
+}

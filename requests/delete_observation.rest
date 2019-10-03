@@ -1,0 +1,1 @@
+delete http://localhost:3004/api/observations/5d94a93b903a8b4326e5d945

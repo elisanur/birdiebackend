@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './process.env' })
+require('dotenv').config({ path: './.env' })
 
 let PORT = process.env.PORT
 let MONGOURL = process.env.MONGOURL

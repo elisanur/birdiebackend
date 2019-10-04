@@ -1,4 +1,5 @@
 const Observation = require('../models/observation')
+const User = require('../models/user')
 
 const initialObservations =  [
 
@@ -35,6 +36,14 @@ const observationsInDb = async () => {
   return obs.map(ob => ob.toJSON())
 }
 
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users.map(u => u.toJSON())
+}
+
 module.exports = {
-  initialObservations, nonExistingId, observationsInDb
+  initialObservations,
+  nonExistingId,
+  observationsInDb,
+  usersInDb
 }

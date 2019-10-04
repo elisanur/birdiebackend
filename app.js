@@ -7,11 +7,11 @@ const observationsRouter = require('./controllers/observations')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
 const logger = require('./utils/logger')
-//const usersRouter = require('./controllers/users')
+const usersRouter = require('./controllers/users')
 
 logger.info('connecting to', config.MONGOURL)
 
-mongoose.connect(config.MONGOURL, { useNewUrlParser: true })
+mongoose.connect(config.MONGOURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     logger.info('connected to MongoDB')
   })
@@ -25,7 +25,7 @@ app.use(bodyParser.json())
 app.use(middleware.requestLogger)
 
 app.use('/api/observations', observationsRouter)
-//app.use('/api/users', usersRouter)
+app.use('/api/users', usersRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

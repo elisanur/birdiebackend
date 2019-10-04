@@ -7,10 +7,10 @@ const observationSchema = new mongoose.Schema({
   scientificName: String,
   rarity: String,
   datetime: Date,
-  /* user: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  } */
+  }
 })
 
 observationSchema.set('toJSON', {

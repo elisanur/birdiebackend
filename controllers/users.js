@@ -24,7 +24,10 @@ usersRouter.post('/', async (request, response, next) => {
 })
 
 usersRouter.get('/', async (request, response) => {
-  const users = await User.find({})
+  const users = await User
+    .find({})
+    .populate('observations')
+    // if fields should be limited, syntax example: .populate('observations', { name: 1, scientificName: 1, rarity: 1})
   response.json(users.map(u => u.toJSON()))
 })
 

@@ -1,5 +1,6 @@
 post http://localhost:3004/api/observations/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOiI1ZDk3OWY2OWQ2NTgzMTViZTI3ZmE3YTIiLCJpYXQiOjE1NzAyMjAwMTh9.Vpv2CUsJtCye_oxDBltIh5z1jlzlmsutIymHWnUd_Sc
 
 {
     "name": "birdie birdie",

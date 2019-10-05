@@ -13,9 +13,6 @@ beforeEach(async () => {
   await api
     .post('/api/users')
     .send({ username: 'root', password: 'sekret' })
-
-  /*const user = new User({ username: 'root', password: 'sekret', passwordHash: 'hdsafasdfasdfasd' })
-  await user.save()*/
 })
 //another option for beforeEach:
 /* beforeEach(async () => {

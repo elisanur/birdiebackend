@@ -9,6 +9,13 @@ const User = require('../models/user')
 beforeEach(async () => {
   await Observation.deleteMany({})
   await Observation.insertMany(helper.initialObservations)
+  await User.deleteMany({})
+  await api
+    .post('/api/users')
+    .send({ username: 'root', password: 'sekret' })
+
+  /*const user = new User({ username: 'root', password: 'sekret', passwordHash: 'hdsafasdfasdfasd' })
+  await user.save()*/
 })
 //another option for beforeEach:
 /* beforeEach(async () => {
@@ -96,8 +103,15 @@ describe('addition of a new observation', () => {
       datetime: new Date()
     }
 
+    let response = await api
+      .post('/api/login')
+      .send({ username: 'root', password: 'sekret' })
+
+    let { token } = JSON.parse(response.res.text)
+
     await api
       .post('/api/observations')
+      .set('Authorization', 'bearer ' + token)
       .send(newObservation)
       .expect(200)
       .expect('Content-Type', /application\/json/)
@@ -131,11 +145,7 @@ describe('deletion of an observation', () => {
 })
 
 describe('when there is initially one user at db', () => {
-  beforeEach(async () => {
-    await User.deleteMany({})
-    const user = new User({ username: 'root', password: 'sekret' })
-    await user.save()
-  })
+  
 
   test('creation succeeds with a fresh username', async () => {
     const usersAtStart = await helper.usersInDb()

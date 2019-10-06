@@ -39,6 +39,7 @@ observationsRouter.get('/:id', async (req, res, next) => {
   }
 })
 
+/*
 observationsRouter.delete('/:id', async (req, res, next) => {
   try {
     await Observation.findByIdAndRemove(req.params.id)
@@ -46,7 +47,7 @@ observationsRouter.delete('/:id', async (req, res, next) => {
   } catch (e) {
     next(e)
   }
-})
+})*/
 
 observationsRouter.post('/', async (req, res, next) => {
   const { body } = req

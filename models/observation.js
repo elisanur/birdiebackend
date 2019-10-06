@@ -6,6 +6,7 @@ const observationSchema = new mongoose.Schema({
   name: String,
   scientificName: String,
   rarity: String,
+  note: String,
   datetime: Date,
   user: {
     type: mongoose.Schema.Types.ObjectId,

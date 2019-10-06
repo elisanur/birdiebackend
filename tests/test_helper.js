@@ -7,6 +7,7 @@ const initialObservations =  [
     name: 'Avocet',
     scientificName: 'Recurvirostra avosetta',
     rarity: 'common',
+    note: 'Avocet was singing really loud today!',
     datetime: new Date()
   },
   {

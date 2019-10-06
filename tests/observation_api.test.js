@@ -50,8 +50,10 @@ describe('when there is initially some observations saved', () => {
     const response = await api.get('/api/observations')
 
     const names = response.body.map(r => r.name)
+    const notes = response.body.map(o => o.note)
 
     expect(names).toContain('Avocet')
+    expect(notes).toContain('Avocet was singing really loud today!')
   })
 })
 
@@ -142,7 +144,7 @@ describe('deletion of an observation', () => {
 })
 
 describe('when there is initially one user at db', () => {
-  
+
 
   test('creation succeeds with a fresh username', async () => {
     const usersAtStart = await helper.usersInDb()

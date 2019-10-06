@@ -67,12 +67,6 @@ observationsRouter.post('/', async (req, res, next) => {
       })
     }
 
-    if (!body.scientificName) {
-      return res.status(400).json({
-        error: 'scientific name missing'
-      })
-    }
-
     if (!body.rarity) {
       return res.status(400).json({
         error: 'rarity missing'
@@ -83,6 +77,7 @@ observationsRouter.post('/', async (req, res, next) => {
       name: body.name,
       scientificName: body.scientificName,
       rarity: body.rarity,
+      note: body.note,
       datetime: new Date(),
       user: user._id
     })
@@ -103,7 +98,8 @@ observationsRouter.put('/:id', (req, res, next) => {
   const observation = {
     name: body.name,
     scientificName: body.scientificName,
-    rarity: body.rarity
+    rarity: body.rarity,
+    note: body.note,
   }
 
   Observation.findByIdAndUpdate(req.params.id, observation, { new: true })

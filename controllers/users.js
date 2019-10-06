@@ -19,11 +19,11 @@ usersRouter.post('/', async (request, response, next) => {
 
     response.json(savedUser)
   } catch (exception) {
-    
+
     response
       .status(400)
       .send({ error: '`username` to be unique' })
-      
+
     next(exception)
   }
 })

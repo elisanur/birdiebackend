@@ -13,9 +13,11 @@ const getTokenFrom = request => {
 }
 
 observationsRouter.get('/', async (req, res, next) => {
+  const { order='-1' } = req.query
   try {
     const observations = await Observation
       .find({})
+      .sort({ datetime: order })
       .populate('user')
     // if fields should be limited, syntax: .populate('user', { username: 1, name: 1 })
     res.json(observations.map(o => o.toJSON()))

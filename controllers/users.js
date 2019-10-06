@@ -28,6 +28,7 @@ usersRouter.post('/', async (request, response, next) => {
   }
 })
 
+/* ONLY FOR LOCAL DEV USE / WILL SHOW PUBLICLY USERS
 usersRouter.get('/', async (request, response) => {
   const users = await User
     .find({})
@@ -35,5 +36,5 @@ usersRouter.get('/', async (request, response) => {
     // if fields should be limited, syntax example: .populate('observations', { name: 1, scientificName: 1, rarity: 1})
   response.json(users.map(u => u.toJSON()))
 })
-
+*/
 module.exports = usersRouter

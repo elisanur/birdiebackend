@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "watch": "cross-env NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd /projects/birdie && npm run build --prod && cp -r build /projects/birdiebackend/",
+    "build:ui": "rm -rf build && cd /projects/birdie && npm run build-heroku --prod && cp -r build /projects/birdiebackend/",
     "deploy": "git push -u heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "logs:prod": "heroku logs --tail",

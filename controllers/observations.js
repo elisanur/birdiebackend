@@ -74,12 +74,18 @@ observationsRouter.post('/', async (req, res, next) => {
       })
     }
 
+    if (!body.datetime) {
+      return res.status(400).json({
+        error: 'datetime missing'
+      })
+    }
+
     const observation = new Observation({
       name: body.name,
       scientificName: body.scientificName,
       rarity: body.rarity,
       note: body.note,
-      datetime: new Date(),
+      datetime: body.datetime,
       user: user._id
     })
 
